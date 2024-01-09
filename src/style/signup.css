@@ -1,95 +1,98 @@
-
-.SignUp {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 100vh;
-}
-
-/* INFO SECTION */
-
-figure {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: 700;
-}
-
-/* SIGN UP SECTION */
-
-.signup-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 550px;
-  border-radius: 32px;
-  background-color: #fff;
-  color: #000;
-}
-
-.card {
-  gap: 50px;
-  width: 457px;
-  /* height: 745px; */
-  padding: 32px;
-  margin-bottom: 30px;
-}
-h1 {
-  font-size: 36px;
-  font-weight: 500;
-}
-
-.card,
+/* GENERAL */
+.SignUp,
+figure,
 form,
 label {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
+.SignUp {
+  /* max-width: 400px; */
+  background-color: #fff;
+  color: #2B2E33;
+  padding: 28px;
+  border-radius: 10px;
+}
+
+figure {
+  gap: 10px;
+}
+
+figure img {
+  width: 75px;
+}
+
+figcaption {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+h1 {
+  font-weight: 400;
+  margin: 15px 0;
+}
 
 form {
-  gap: 25px;
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: 15px;
 }
 
 label {
-  font-weight: 400;
+  align-items: flex-start;
   color: #84818A;
+  gap: 5px;
 }
 
 input {
-  border: none;
+  border: 1px solid #DCDBDD;
+  border-radius: 10px;
   outline: none;
-  padding: 6px 0;
-  font-size: 16px;
-  color: #202020;
-  box-shadow: 0px 1px 0px 0px #DCDBDD;
+  width: 320px;
+  font-size: 15px;
+  padding: 14px;
 }
 
-#terms {
-  display: flex;
-  gap: 10px;
-  flex-direction: row;
-}
-
-input#terms {
-  box-shadow: none;
-  width: 25px;
-  height: 25px;
+input:focus {
+  border: 1px solid #2B2E33;
 }
 
 button {
-  padding: 15px;
-  font-size: 17px;
+  width: 320px;
   font-weight: 500;
+  font-size: 16px;
   border: none;
-  border-radius: 15px;
-  background-color: #242627;
+  padding: 14px 0;
+  margin: 10px 0;
+  background-color: #2B2E33;
   color: #fff;
+  border-radius: 10px;
   cursor: pointer;
 }
 
-#policy {
-  color: #84818A;
+.instructions {
+  width: 320px;
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
+  background: #2B2E33;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
+}
+
+.instructions > svg {
+  margin-right: 0.25rem;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.valid {
+  border: 1px solid limegreen !important;
 }

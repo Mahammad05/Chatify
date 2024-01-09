@@ -21,59 +21,10 @@ code {
 }
 
 .App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100lvh;
   color: #fff;
 }
 
-
-
-
-/* .SignUp {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  padding: 28px 50px;
-  background-color: #fff;
-  border-radius: 15px;
-} */
-
-/* form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-h1 {
-  font-weight: 500;
-  font-size: 36px;
-  line-height: 48px;
-  color: #202020;
-}
-
-p {
-  font-weight: 500;
-  font-size: 14px;
-  color: #202020;
-}
-
-label {
-  display: flex;
-  flex-direction: column;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 17px;
-  color: #84818A;
-}
-
-input {
-  border: none;
-  outline: none;
-  box-shadow: 0px 1px 0px 0px #DCDBDD;
-}
-
-button {
-  height: 48px;
-  border: none;
-  background-color: #242627;
-  color: #fff;
-  border-radius: 15px;
-} */

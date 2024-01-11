@@ -1,20 +1,22 @@
-import { useRef, useState, useEffect, useTransition } from "react";
-import { faInfoCircle, faL } from "@fortawesome/free-solid-svg-icons";
+import { useRef, useState, useEffect } from "react";
+import { useStore } from "easy-peasy";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import logo from "./img/Vector.svg";
-import "./style/signup.css";
+import logo from "../img/Vector.svg";
+import "../style/signup.css";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const SignUp = () => {
-  const userRef = useRef();
+  const emailRef = useRef();
   const errRef = useRef();
+  const store = useStore();
 
-  // States for username
-  const [user, setUser] = useState("");
-  const [validName, setValidName] = useState(false);
-  const [userFocus, setUserFocus] = useState(false);
+  // States for email
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
 
   // State for password
   const [pwd, setPwd] = useState("");
@@ -30,21 +32,19 @@ const SignUp = () => {
   const [errMsg, steErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
-  // State for valid input
-  const [inputBorder, setInputBorder] = useState("#2B2E33");
 
-  // Focus on username input
+  // Focus on email input
   useEffect(() => {
-    if (userRef.current) {
-      userRef.current.focus();
+    if (emailRef.current) {
+      emailRef.current.focus();
     }
   }, []);
 
-  // Check for valid username
+  // Check for valid email
   useEffect(() => {
-    const result = USER_REGEX.test(user);
-    setValidName(result);
-  }, [user]);
+    const result = EMAIL_REGEX.test(email);
+    setValidEmail(result);
+  }, [email]);
 
   // Check for valid password and match password
   useEffect(() => {
@@ -57,7 +57,22 @@ const SignUp = () => {
   // Check for error message
   useEffect(() => {
     steErrMsg("");
-  }, [user, pwd, matchPwd]);
+  }, [email, pwd, matchPwd]);
+
+  // Control submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Invalid entry
+    const v1 = EMAIL_REGEX.test(email);
+    const v2 = PWD_REGEX.test(pwd);
+    if (!v1 || !v2) {
+      steErrMsg("Invalid Entry");
+      return;
+    }
+
+    // call the singUp function from easy-peasy
+    await store.dispatch.auth.signUp({ email, password: pwd});
+  }
 
   return (
     <section className="SignUp">
@@ -77,31 +92,30 @@ const SignUp = () => {
         {errMsg}
       </p>
 
-      <form>
-        <label htmlFor="username">
-          Username
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">
+          Email
           <input
-            type="text"
-            id="username"
+            type="email"
+            id="email"
             autoComplete="off"
             required
-            aria-invalid={validName ? "false" : "true"}
+            aria-invalid={validEmail ? "false" : "true"}
             aria-describedby="uidnote"
-            ref={userRef}
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
-            onFocus={() => setUserFocus(true)}
-            onBlur={() => setUserFocus(false)}
-            className={validName ? "valid" : ""}
+            ref={emailRef}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onFocus={() => setEmailFocus(true)}
+            onBlur={() => setEmailFocus(false)}
+            className={validEmail ? "valid" : ""}
           />
           <p
             id="uidnote"
             className={
-              userFocus && user && !validName ? "instructions" : "offscreen"
+              emailFocus && email && !validEmail ? "instructions" : "offscreen"
             }
           >
-            <FontAwesomeIcon icon={faInfoCircle} />4 to 24 characters. Must
-            begin with a letter. Letters, numbers, underscores, hyphens allowed.
+            <FontAwesomeIcon icon={faInfoCircle} />Please use a valid email address. Your email address should be at least three characters long and follow a standard format, for example: "example@example.com".
           </p>
         </label>
         <label htmlFor="password">
@@ -157,7 +171,7 @@ const SignUp = () => {
           </p>
         </label>
 
-        <button>Sign Up</button>
+        <button disabled={!validEmail || !validPwd || !validMatch ? true : false}>Sign Up</button>
 
         <p>
           Already have an account? <a href="#">Log in</a>

@@ -96,3 +96,8 @@ button {
 .valid {
   border: 1px solid limegreen !important;
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,54 +1,65 @@
-import { action, createStore } from "easy-peasy";
+import { thunk, action, createStore } from "easy-peasy";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
+  onAuthStateChanged
 } from "firebase/auth";
 import { auth } from "./firebase-conf";
 
 const authModel = {
-  user: null,
+  user: {},
   setUser: action((state, payload) => {
     state.user = payload;
   }),
 
-  auth: {
-    signUp: action(async (state, { email, password }) => {
-      try {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        state.setUser(userCredential.user);
-        console.log(userCredential);
-      } catch (err) {
-        console.log(err.message);
-      }
-    }),
+  signUp: thunk(async (actions, { email, password }) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      actions.setUser(userCredential.user);
+      console.log("You are signed up", userCredential.user);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }),
 
-    login: action(async (state, { email, password }) => {
-      try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        state.setUser(userCredential.user);
-      } catch (err) {
-        console.log(err.message);
-      }
-    }),
+  signIn: thunk(async (actions, { email, password }) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      actions.setUser(userCredential.user);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }),
 
-    logout: action(async (state) => {
-      try {
-        await signOut(auth);
-        state.setUser(null);
-      } catch (err) {
-        console.log(err.message);
+  logout: thunk(async (actions) => {
+    try {
+      await signOut(auth);
+      actions.setUser({});
+    } catch (err) {
+      console.log(err.message);
+    }
+  }),
+
+  init: thunk(async (actions) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if(user) {
+        actions.setUser(user);
+      } else {
+        actions.setUser({});
       }
-    }),
-  },
+    });
+
+    return () => unsubscribe();
+  }),
 };
 
 const store = createStore(authModel);

@@ -7,13 +7,13 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDa_IoysARdWPnfUMw_BtvU4hkvLiw3CiI",
-  authDomain: "chatify-b5bcf.firebaseapp.com",
-  projectId: "chatify-b5bcf",
-  storageBucket: "chatify-b5bcf.appspot.com",
-  messagingSenderId: "450911967307",
-  appId: "1:450911967307:web:9ec3e5509d596f3a0655ce",
-  measurementId: "G-NKGC3G3CXR"
+  apiKey: "XXXXXXXXXX",
+  authDomain: "XXXXXXXXXX",
+  projectId: "XXXXXXXXXXe",
+  storageBucket: "XXXXXXXXXX",
+  messagingSenderId: "XXXXXXXXXX7",
+  appId: "XXXXXXXXXX",
+  measurementId: "XXXXXXXXXX"
 };
 
 // Initialize Firebase

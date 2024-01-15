@@ -7,59 +7,101 @@ import {
 } from "firebase/auth";
 import { auth } from "./firebase-conf";
 
+const performAuthAction = async (authFunction, actions, { email, password }) => {
+  try {
+    const userCredential = await authFunction(auth, email, password);
+    actions.setUser(userCredential.user);
+    console.log(userCredential.user);
+  } catch (error) {
+    console.log(`Authentication failed: ${error.message}`);
+  }
+}
+
 const authModel = {
   user: {},
+  email: "",
+  validEmail: false,
+  emailFocus: false,
+  password: "",
+  validPassword: false,
+  passwordFocus: false,
+  matchPassword: "",
+  validMatch: false,
+  matchFocus: false,
+  errorMessage: "",
+  success: false,
+
   setUser: action((state, payload) => {
     state.user = payload;
   }),
 
-  signUp: thunk(async (actions, { email, password }) => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      actions.setUser(userCredential.user);
-      console.log("You are signed up", userCredential.user);
-    } catch (err) {
-      console.log(err.message);
-    }
+  setEmail: action((state, payload) => {
+    state.email = payload;
   }),
 
-  signIn: thunk(async (actions, { email, password }) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      actions.setUser(userCredential.user);
-    } catch (err) {
-      console.log(err.message);
-    }
+  setValidEmail: action((state, payload) => {
+    state.validEmail = payload;
+  }),
+
+  setEmailFocus: action((state, payload) => {
+    state.emailFocus = payload;
+  }),
+
+  setPassword: action((state, payload) => {
+    state.password = payload;
+  }),
+
+  setValidPassword: action((state, payload) => {
+    state.validPassword = payload;
+  }),
+
+  setPasswordFocus: action((state, payload) => {
+    state.passwordFocus = payload;
+  }),
+
+  setMatchPassword: action((state, payload) => {
+    state.matchPassword = payload;
+  }),
+
+  setValidMatch: action((state, payload) => {
+    state.validMatch = payload;
+  }),
+
+  setMatchFocus: action((state, payload) => {
+    state.matchFocus = payload;
+  }),
+
+  setErrorMessage: action((state, payload) => {
+    state.errorMessage = payload;
+  }),
+
+  setSuccess: action((state, payload) => {
+    state.success = payload;
+  }),
+  
+  signUp: thunk(async (actions, payload) => {
+    await performAuthAction(createUserWithEmailAndPassword, actions, payload);
+  }),
+
+  signIn: thunk(async (actions, payload) => {
+    await performAuthAction(signInWithEmailAndPassword, actions, payload);
   }),
 
   logout: thunk(async (actions) => {
-    try {
-      await signOut(auth);
-      actions.setUser({});
-    } catch (err) {
-      console.log(err.message);
-    }
+    await performAuthAction(signOut, actions, {});
   }),
 
   init: thunk(async (actions) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if(user) {
-        actions.setUser(user);
-      } else {
-        actions.setUser({});
-      }
+      user ? actions.setUser(user) : actions.setUser({});
     });
 
     return () => unsubscribe();
   }),
+
+  onInitialize: thunk(async (actions) => {
+    await actions.init();
+  })
 };
 
 const store = createStore(authModel);

@@ -1,7 +1,9 @@
-import { useRef, useState, useEffect } from "react";
-import { useStoreActions } from "easy-peasy";
+import { useRef, useEffect } from "react";
+import { useStoreState, useStoreActions } from "easy-peasy";
+import { useNavigate } from "react-router-dom";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import logo from "../img/Vector.svg";
 import "../style/signup.css";
 
@@ -11,25 +13,39 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const SignUp = () => {
   const emailRef = useRef();
   const errRef = useRef();
+  const navigate = useNavigate();
 
-  // States for email
-  const [email, setEmail] = useState("");
-  const [validEmail, setValidEmail] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false);
+  // STATE FOR EMAIL
+  const email = useStoreState((state) => state.email);
+  const setEmail = useStoreActions((actions) => actions.setEmail);
+  const validEmail = useStoreState((state) => state.validEmail);
+  const setValidEmail = useStoreActions((actions) => actions.setValidEmail);
+  const emailFocus = useStoreState((state) => state.emailFocus);
+  const setEmailFocus = useStoreActions((actions) => actions.setEmailFocus);
 
-  // State for password
-  const [pwd, setPwd] = useState("");
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
+  // STATE FOR PASSWORD
+  const password = useStoreState((state) => state.password);
+  const setPassword = useStoreActions((actions) => actions.setPassword);
+  const validPassword = useStoreState((state) => state.validPassword);
+  const setValidPassword = useStoreActions((actions) => actions.setValidPassword);
+  const passwordFocus = useStoreState((state) => state.passwordFocus);
+  const setPasswordFocus = useStoreActions((actions) => actions.setPasswordFocus);
 
-  // States for confirm password
-  const [matchPwd, setMatchPwd] = useState("");
-  const [validMatch, setValidMatch] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
+  // STATE FOR CONFIRM PASSWORD
+  const matchPassword = useStoreState((state) => state.matchPassword);
+  const setMatchPassword = useStoreActions((actions) => actions.setMatchPassword);
+  const validMatch = useStoreState((state) => state.validMatch);
+  const setValidMatch = useStoreActions((actions) => actions.setValidMatch);
+  const matchFocus = useStoreState((state) => state.matchFocus);
+  const setMatchFocus = useStoreActions((actions) => actions.setMatchFocus);
 
-  // States for errors
-  const [errMsg, steErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  // STATE FOR ERRORS
+  const errorMessage = useStoreState((state) => state.errorMessage);
+  const setErrorMessage = useStoreActions((actions) => actions.setErrorMessage);
+
+  // SUCCESSFUL AUTHENTICATION
+  const success = useStoreState((state) => state.success);
+  const setSuccess = useStoreActions((actions) => actions.setSuccess);
 
   // Focus on email input
   useEffect(() => {
@@ -46,16 +62,16 @@ const SignUp = () => {
 
   // Check for valid password and match password
   useEffect(() => {
-    const result = PWD_REGEX.test(pwd);
-    setValidPwd(result);
-    const match = pwd === matchPwd;
+    const result = PWD_REGEX.test(password);
+    setValidPassword(result);
+    const match = password === matchPassword;
     setValidMatch(match);
-  }, [pwd, matchPwd]);
+  }, [password, matchPassword]);
 
   // Check for error message
   useEffect(() => {
-    steErrMsg("");
-  }, [email, pwd, matchPwd]);
+    setErrorMessage("");
+  }, [email, password, matchPassword]);
 
   // Use useStoreActions to get signUp action
   const signUp = useStoreActions((actions) => actions.signUp);
@@ -65,14 +81,15 @@ const SignUp = () => {
     e.preventDefault();
     // Invalid entry
     const v1 = EMAIL_REGEX.test(email);
-    const v2 = PWD_REGEX.test(pwd);
+    const v2 = PWD_REGEX.test(password);
     if (!v1 || !v2) {
-      steErrMsg("Invalid Entry");
+      setErrorMessage("Invalid Entry");
       return;
     }
 
     // call the singUp function from easy-peasy
-    await signUp({ email, password: pwd });
+    await signUp({ email, password });
+    navigate('/home');
   }
 
   return (
@@ -83,14 +100,14 @@ const SignUp = () => {
       </figure>
 
       <h1>Welcome</h1>
-      <p>Sign Up to Chatify</p>
+      <p>Sign up to Chatify</p>
 
       <p
         ref={errRef}
-        className={errMsg ? "errMsg" : "offscreen"}
+        className={errorMessage ? "errMsg" : "offscreen"}
         aria-live="assertive"
       >
-        {errMsg}
+        {errorMessage}
       </p>
 
       <form onSubmit={handleSubmit}>
@@ -125,16 +142,16 @@ const SignUp = () => {
             type="password"
             id="password"
             required
-            aria-invalid={validPwd ? "false" : "true"}
+            aria-invalid={validPassword ? "false" : "true"}
             aria-describedby="pwdnote"
-            onChange={(e) => setPwd(e.target.value)}
-            onFocus={() => setPwdFocus(true)}
-            onBlur={() => setPwdFocus(false)}
-            className={validPwd ? "valid" : ""}
+            onChange={(e) => setPassword(e.target.value)}
+            onFocus={() => setPasswordFocus(true)}
+            onBlur={() => setPasswordFocus(false)}
+            className={validPassword ? "valid" : ""}
           />
           <p
             id="pwdnote"
-            className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
+            className={passwordFocus && !validPassword ? "instructions" : "offscreen"}
           >
             <FontAwesomeIcon icon={faInfoCircle} />
             8 to 24 characters.
@@ -158,10 +175,10 @@ const SignUp = () => {
             required
             aria-invalid={validMatch ? "false" : "true"}
             aria-describedby="confirmnote"
-            onChange={(e) => setMatchPwd(e.target.value)}
+            onChange={(e) => setMatchPassword(e.target.value)}
             onFocus={() => setMatchFocus(true)}
             onBlur={() => setMatchFocus(false)}
-            className={validMatch && matchPwd ? 'valid' : ''}
+            className={validMatch && matchPassword ? 'valid' : ''}
           />
           <p
             id="confirmnote"
@@ -172,10 +189,10 @@ const SignUp = () => {
           </p>
         </label>
 
-        <button disabled={!validEmail || !validPwd || !validMatch ? true : false}>Sign Up</button>
+        <button disabled={!validEmail || !validPassword || !validMatch ? true : false}>Sign Up</button>
 
         <p>
-          Already have an account? <a href="#">Log in</a>
+          Already have an account? <Link to="/signin">Sign In</Link>
         </p>
       </form>
     </section>

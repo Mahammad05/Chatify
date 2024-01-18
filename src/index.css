@@ -13,6 +13,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #242627;
   box-sizing: border-box;
+  overflow: hidden;
+  height: 1300px;
 }
 
 code {
@@ -28,3 +30,6 @@ code {
   color: #fff;
 }
 
+.Home {
+  background-color: wheat;
+}

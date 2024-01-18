@@ -1,9 +1,12 @@
-import React from 'react'
+import Sidebar from "../companents/Sidebar"
+import Frame from "../companents/Frame"
+import "../style/home.css";
 
 const Home = () => {
   return (
-    <div>
-        <h1>Welcome</h1>
+    <div className="Home">
+        <Sidebar />
+        <Frame />
     </div>
   )
 }

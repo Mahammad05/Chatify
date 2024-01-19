@@ -1,4 +1,6 @@
 .Sidebar {
     background-color: red;
     width: 424px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }

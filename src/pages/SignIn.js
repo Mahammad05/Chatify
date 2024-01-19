@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import logo from "../img/Vector.svg";
+import logo from "../img/logo_black.svg";
 import "../style/signup.css";
 
 const SignIn = () => {

@@ -189,7 +189,7 @@ const SignUp = () => {
           </p>
         </label>
 
-        <button disabled={!validEmail || !validPassword || !validMatch ? true : false}>Sign Up</button>
+        <button id="signup-btn" disabled={!validEmail || !validPassword || !validMatch ? true : false}>Sign Up</button>
 
         <p>
           Already have an account? <Link to="/signin">Sign In</Link>

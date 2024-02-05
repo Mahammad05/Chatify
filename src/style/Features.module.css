@@ -1,0 +1,14 @@
+.Features {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}

@@ -3,43 +3,7 @@
     border-right: 1.5px solid #2A2E30;
     padding: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    gap: 24px;
-}
-
-.figure {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-}
-
-.img {
-    width: 40px;
-    height: 40px;
-}
-
-.figcaption {
-    font-size: 24px;
-}
-
-.input {
-  border: 1px solid #DCDBDD;
-  border-radius: 10px;
-  outline: none;
-  width: 100%;
-  font-size: 15px;
-  padding: 14px;
-}
-
-.chats {
-    width: 100%;
-}
-
-.ul {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 6px;
 }

@@ -1,0 +1,102 @@
+/* signup.module.css */
+.SignUp,
+.figure,
+.form,
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.SignUp {
+  background-color: #fff;
+  color: #2B2E33;
+  padding: 28px;
+  border-radius: 10px;
+}
+
+.figure {
+  gap: 10px;
+}
+
+.figure img {
+  width: 75px;
+}
+
+.figcaption {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.h1 {
+  font-weight: 400;
+  margin: 15px 0;
+}
+
+.form {
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: 15px;
+}
+
+.label {
+  align-items: flex-start;
+  color: #84818A;
+  gap: 5px;
+}
+
+.input {
+  border: 1px solid #DCDBDD;
+  border-radius: 10px;
+  outline: none;
+  width: 320px;
+  font-size: 15px;
+  padding: 14px;
+}
+
+.input:focus {
+  border: 1px solid #2B2E33;
+}
+
+.button {
+  width: 320px;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  padding: 14px 0;
+  margin: 10px 0;
+  background-color: #2B2E33;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.instructions {
+  width: 320px;
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
+  background: #2B2E33;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
+}
+
+.instructions > svg {
+  margin-right: 0.25rem;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.valid {
+  border: 1px solid limegreen !important;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

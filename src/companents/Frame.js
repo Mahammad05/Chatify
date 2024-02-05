@@ -1,12 +1,11 @@
-import Conversation from './Conversation'
-import '../style/frame.css'
+import styles from '../style/Frame.module.css'
 
 const Frame = () => {
   return (
-    <div className='Frame'>
-      <Conversation />
+    <div className={styles.Frame}>
+      
     </div>
-  )
+  );
 }
 
-export default Frame
+export default Frame;

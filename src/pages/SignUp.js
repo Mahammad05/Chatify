@@ -5,7 +5,7 @@ import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import logo from "../img/logo_black.svg";
-import "../style/signup.css";
+import styles from "../style/SignUp.module.css";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -93,13 +93,13 @@ const SignUp = () => {
   }
 
   return (
-    <section className="SignUp">
-      <figure>
+    <section className={styles.SignUp}>
+      <figure className={styles.figure}>
         <img src={logo} alt="logo" />
-        <figcaption>Chatify</figcaption>
+        <figcaption className={styles.figcaption}>Chatify</figcaption>
       </figure>
 
-      <h1>Welcome</h1>
+      <h1 className={styles.h1}>Welcome</h1>
       <p>Sign up to Chatify</p>
 
       <p
@@ -110,8 +110,8 @@ const SignUp = () => {
         {errorMessage}
       </p>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <label className={styles.label} htmlFor="email">
           Email
           <input
             type="email"
@@ -125,7 +125,7 @@ const SignUp = () => {
             onChange={(e) => setEmail(e.target.value)}
             onFocus={() => setEmailFocus(true)}
             onBlur={() => setEmailFocus(false)}
-            className={validEmail ? "valid" : ""}
+            className={`${styles.input} ${validEmail ? "valid" : ""}`}
           />
           <p
             id="uidnote"
@@ -136,7 +136,7 @@ const SignUp = () => {
             <FontAwesomeIcon icon={faInfoCircle} />Please use a valid email address. Your email address should be at least three characters long and follow a standard format, for example: "example@example.com".
           </p>
         </label>
-        <label htmlFor="password">
+        <label className={styles.label} htmlFor="password">
           Password
           <input
             type="password"
@@ -147,7 +147,7 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
             onFocus={() => setPasswordFocus(true)}
             onBlur={() => setPasswordFocus(false)}
-            className={validPassword ? "valid" : ""}
+            className={`${styles.input} ${validEmail ? "valid" : ""}`}
           />
           <p
             id="pwdnote"
@@ -167,7 +167,7 @@ const SignUp = () => {
             <span aria-label="percent">%</span>
           </p>
         </label>
-        <label htmlFor="confirm_password">
+        <label className={styles.label} htmlFor="confirm_password">
           Confirm password
           <input
             type="password"
@@ -178,7 +178,7 @@ const SignUp = () => {
             onChange={(e) => setMatchPassword(e.target.value)}
             onFocus={() => setMatchFocus(true)}
             onBlur={() => setMatchFocus(false)}
-            className={validMatch && matchPassword ? 'valid' : ''}
+            className={`${styles.input} ${validMatch && matchPassword ? 'valid' : ''}`}
           />
           <p
             id="confirmnote"
@@ -189,7 +189,7 @@ const SignUp = () => {
           </p>
         </label>
 
-        <button id="signup-btn" disabled={!validEmail || !validPassword || !validMatch ? true : false}>Sign Up</button>
+        <button className={styles.button} id="signup-btn" disabled={!validEmail || !validPassword || !validMatch ? true : false}>Sign Up</button>
 
         <p>
           Already have an account? <Link to="/signin">Sign In</Link>

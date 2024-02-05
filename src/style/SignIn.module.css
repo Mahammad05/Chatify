@@ -1,53 +1,52 @@
-/* GENERAL */
-.SignUp,
-figure,
-form,
-label {
+/* signup.module.css */
+.SignIn,
+.figure,
+.form,
+.label {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.SignUp {
-  /* max-width: 400px; */
+.SignIn {
   background-color: #fff;
   color: #2B2E33;
   padding: 28px;
   border-radius: 10px;
 }
 
-figure {
+.figure {
   gap: 10px;
 }
 
-figure img {
+.figure img {
   width: 75px;
 }
 
-figcaption {
+.figcaption {
   font-size: 32px;
   font-weight: 700;
 }
 
-h1 {
+.h1 {
   font-weight: 400;
   margin: 15px 0;
 }
 
-form {
+.form {
   align-items: flex-start;
   gap: 13px;
   margin-top: 15px;
 }
 
-label {
+.label {
   align-items: flex-start;
   color: #84818A;
   gap: 5px;
 }
 
-input {
+.input {
   border: 1px solid #DCDBDD;
   border-radius: 10px;
   outline: none;
@@ -56,11 +55,11 @@ input {
   padding: 14px;
 }
 
-input:focus {
+.input:focus {
   border: 1px solid #2B2E33;
 }
 
-#signup-btn {
+.button {
   width: 320px;
   font-weight: 500;
   font-size: 16px;
@@ -97,7 +96,7 @@ input:focus {
   border: 1px solid limegreen !important;
 }
 
-#signup-btn:disabled {
+.button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }

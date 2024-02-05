@@ -3,7 +3,7 @@ import { useStoreState, useStoreActions } from "easy-peasy";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import logo from "../img/logo_black.svg";
-import "../style/signup.css";
+import styles from "../style/SignIn.module.css";
 
 const SignIn = () => {
   const emailRef = useRef();
@@ -46,13 +46,13 @@ const SignIn = () => {
   };
 
   return (
-    <section className="SignUp">
-      <figure>
+    <section className={styles.SignIn}>
+      <figure className={styles.figure}>
         <img src={logo} alt="logo" />
-        <figcaption>Chatify</figcaption>
+        <figcaption className={styles.figcaption}>Chatify</figcaption>
       </figure>
 
-      <h1>Welcome</h1>
+      <h1 className={styles.h1}>Welcome</h1>
       <p>Sign in to Chatify</p>
 
       <p
@@ -63,8 +63,8 @@ const SignIn = () => {
         {errorMessage}
       </p>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <label className={styles.label} htmlFor="email">
           Email
           <input
             type="email"
@@ -74,19 +74,22 @@ const SignIn = () => {
             ref={emailRef}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className={styles.input}
           />
         </label>
-        <label htmlFor="password">
+        <label className={styles.label} htmlFor="password">
           Password
           <input
             type="password"
             id="password"
             required
             onChange={(e) => setPassword(e.target.value)}
+            className={styles.input}
           />
         </label>
 
         <button
+          className={styles.button}
           disabled={!email || !password ? true : false}
         >
           Sign In

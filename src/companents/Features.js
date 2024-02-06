@@ -3,6 +3,7 @@ import lightmodeicon from '../icons/light.svg'
 import upgradeicon from '../icons/upgrade.svg'
 import updateicon from '../icons/update.svg'
 import logouticon from '../icons/log_out.svg'
+import userpp from '../img/User.png'
 import styles from '../style/Features.module.css'
 
 const Features = () => {
@@ -27,6 +28,10 @@ const Features = () => {
         <div className={styles.feature}>
             <img src={logouticon} alt="log out icon" />
             <p>Log out</p>
+        </div>
+        <div className={styles.feature}>
+            <img className={styles.userpp} src={userpp} alt="user profile" />
+            <figcaption>Antoine Piedanna</figcaption>
         </div>
     </div>
   );

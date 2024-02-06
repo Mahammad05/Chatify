@@ -1,0 +1,10 @@
+.Conversation {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 32px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}

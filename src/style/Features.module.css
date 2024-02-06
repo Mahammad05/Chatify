@@ -4,6 +4,8 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    border-top: 1.5px solid #2A2E30;
+    padding: 12px 0;
 }
 
 .feature {
@@ -11,4 +13,9 @@
     align-items: center;
     gap: 12px;
     cursor: pointer;
+}
+
+.userpp {
+    width: 40px;
+    height: 40px;
 }

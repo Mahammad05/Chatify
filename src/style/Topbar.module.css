@@ -1,0 +1,16 @@
+.Topbar {
+    color: #A2A5B1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.figure {
+    padding: 14px;
+    border: 0.5px solid #DEDEDE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border-radius: 50px;
+    cursor: pointer;
+}
